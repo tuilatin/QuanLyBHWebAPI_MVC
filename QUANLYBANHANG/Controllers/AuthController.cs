@@ -137,7 +137,8 @@ namespace QUANLYBANHANG.Controllers
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    username = user.UserName
+                    username = user.UserName,
+                    role = userRoles.FirstOrDefault()
                 });
             }
 

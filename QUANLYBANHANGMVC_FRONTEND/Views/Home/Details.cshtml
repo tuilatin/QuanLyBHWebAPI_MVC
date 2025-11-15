@@ -1,0 +1,247 @@
+﻿@model QUANLYBANHANGMVC_FRONTEND.Models.ViewModels.SanPhamViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="product-details-wrapper">
+    <h1 class="section-title">CHI TIẾT SẢN PHẨM</h1>
+
+    <div class="product-details-card">
+        <div class="product-layout">
+            <!-- Hình ảnh sản phẩm -->
+            <div class="product-image-container">
+                <img src="@(string.IsNullOrEmpty(Model.Hinhanh) ? Url.Content("~/images/placeholder.jpg") : Url.Content($"~/images/{Model.Hinhanh}"))"
+                     alt="@Model.Tensanpham"
+                     class="product-img" />
+            </div>
+
+            <!-- Thông tin sản phẩm -->
+            <div class="product-info-container">
+                <h2 class="product-title">@Model.Tensanpham</h2>
+
+                <div class="info-list">
+                    <div class="info-row">
+                        <span class="info-label">Mã sản phẩm:</span>
+                        <span class="info-value">@Model.Masanpham</span>
+                    </div>
+
+                    <div class="info-row price-row">
+                        <span class="info-label">Đơn giá:</span>
+                        <span class="info-value price">@Model.Dongia?.ToString("N0") VNĐ</span>
+                    </div>
+
+                    <div class="info-row">
+                        <span class="info-label">Số lượng:</span>
+                        <span class="info-value">@Model.Soluong</span>
+                    </div>
+
+                    <div class="info-row full-width">
+                        <span class="info-label">Mô tả:</span>
+                        <span class="info-value description">@Model.Mota</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a asp-action="Index" class="btn btn-back">← Quay lại</a>
+                    <button class="btn btn-add-cart">🛒 Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<style>
+    .product-details-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 15px;
+    }
+
+    .section-title {
+        color: #007bff;
+        font-size: 1em;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #007bff;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .product-details-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        padding: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    .product-layout {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .product-image-container {
+        flex: 0 0 180px;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .product-img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        max-height: 180px;
+    }
+
+    .product-info-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .product-title {
+        color: #ff6b6b;
+        font-size: 1.2em;
+        font-weight: 600;
+        margin: 0 0 10px 0;
+        line-height: 1.2;
+    }
+
+    .info-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 6px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .info-row:last-child {
+        border-bottom: none;
+    }
+
+    .info-row.price-row {
+        background: #fff9f0;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ffd700;
+        margin-bottom: 5px;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #333;
+        min-width: 90px;
+        font-size: 0.88em;
+    }
+
+    .info-value {
+        color: #555;
+        font-size: 0.88em;
+        flex: 1;
+        width: 185px;
+    }
+
+    .info-value.price {
+        color: #ff6b6b;
+        font-size: 1.15em;
+        font-weight: 700;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 10px;
+        border-top: 1px solid #e0e0e0;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.88em;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex: 1;
+    }
+
+    .btn-back {
+        background: #6c757d;
+        color: white;
+    }
+
+    .btn-back:hover {
+        background: #5a6268;
+    }
+
+    .btn-add-cart {
+        background: #28a745;
+        color: white;
+    }
+
+    .btn-add-cart:hover {
+        background: #218838;
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .product-layout {
+            flex-direction: column;
+        }
+
+        .product-image-container {
+            flex: 0 0 auto;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .info-label {
+            min-width: 80px;
+            font-size: 0.85em;
+        }
+
+        .info-value {
+            font-size: 0.85em;
+        }
+
+        .section-title {
+            font-size: 0.95em;
+        }
+
+        .product-title {
+            font-size: 1.1em;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .product-details-wrapper {
+            padding: 10px;
+        }
+
+        .product-details-card {
+            padding: 12px;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+    }
+</style>

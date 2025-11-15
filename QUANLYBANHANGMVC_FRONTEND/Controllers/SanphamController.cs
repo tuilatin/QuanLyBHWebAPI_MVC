@@ -5,9 +5,12 @@ using QUANLYBANHANGMVC_FRONTEND.Models.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using QUANLYBANHANGMVC_FRONTEND.Attributes;
 
 namespace QUANLYBANHANGMVC_FRONTEND.Controllers
 {
+    [AdminOnly] // Áp dụng cho toàn bộ controller - chỉ Admin mới truy cập được
     public class SanphamController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

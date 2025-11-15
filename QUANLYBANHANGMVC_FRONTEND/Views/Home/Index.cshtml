@@ -1,8 +1,44 @@
-﻿@{
+﻿@model List<QUANLYBANHANGMVC_FRONTEND.Models.ViewModels.SanPhamViewModel>
+@{
     ViewData["Title"] = "Home Page";
 }
+@* <h2 class="section-title">Sản Phẩm Nổi Bật</h2> *@
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@if (Model != null && Model.Any())
+{
+    @foreach (var product in Model)
+    {
+        <div class="product-card">
+            <div class="product-image">
+                @if (!string.IsNullOrEmpty(product.Hinhanh))
+                {
+                    <img src="~/images/@product.Hinhanh" alt="@product.Tensanpham" />
+                }
+                else
+                {
+                    <img src="~/images/surface.jpg" alt="@product.Tensanpham" />
+                }
+            </div>
+            <div class="product-info">
+                <h3 class="product-title">@product.Tensanpham</h3>
+                <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                <div class="product-price">
+                    @product.Dongia?.ToString("N0")đ
+                </div>
+                <div class="product-quantity">
+                    Số lượng: @product.Soluong
+                </div>
+                <div class="product-actions">
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@product.Masanpham" class="btn-view-details">
+                        Xem chi tiết
+                    </a>
+                    <button class="btn-add-cart">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Không có sản phẩm nào.</p>
+}
